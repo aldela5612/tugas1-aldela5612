@@ -225,12 +225,27 @@ Buka JupyterLab pada `http://localhost:8888/lab`. Konfigurasi Dockerfile menjala
 - Setiap penggunaan AI harus dicantumkan pada bagian AI Disclosure Statement di bawah.
 - Pelanggaran pertama bernilai 0 untuk tugas terkait; pelanggaran berikutnya dapat berakibat nilai E untuk mata kuliah sesuai ketentuan akademik.
 
+## Milestone 3: EDA dan analisis temporal
+
+Hasil tersedia di `notebooks/03_eda_and_insights.ipynb`, mengikuti empat bagian template notebook GitHub: memuat data bersih, analisis temporal, enam visualisasi interaktif, dan lima insight. Notebook sudah dijalankan pada Parquet hasil Milestone 2, dengan 1.163.770 film unik.
+
+Kohort temporal dibatasi film berstatus `Released` pada 2000–2023. Rating menggunakan minimal 100 vote; analisis finansial hanya memakai anggaran dan pendapatan positif. Operasi temporal menggunakan Polars `group_by_dynamic`, `rolling_mean`, serta DuckDB `LAG ... OVER`. Grafik mencakup tren tahunan dengan range slider, distribusi rating, heatmap korelasi, komposisi genre, pola bulanan, serta scatter finansial multidimensi.
+
+Untuk menjalankan ulang dari root proyek:
+
+```bash
+python -m pip install -r requirements.txt
+python src/run_eda.py
+```
+
+Alternatifnya, buka notebook di JupyterLab dan pilih **Restart Kernel and Run All Cells**. Jika Parquet belum tersedia, jalankan notebook Milestone 2 dahulu. Hasil eksekusi disimpan di notebook, enam HTML mandiri di `output/figures/`, tabel agregat di `output/tables/`, dan ringkasan insight di `output/milestone3_insights.md`. HTML dapat dibuka tanpa internet; folder grafik diabaikan Git sesuai `.gitignore` dan dibuat ulang saat eksekusi.
+
+**Batasan:** TMDB merupakan katalog global, sementara spesifikasi tugas meminta dataset Indonesia. Kesesuaian dataset perlu dikonfirmasi kepada dosen. Tanggal rilis bukan tanggal pencatatan; kelengkapan katalog dan tanggal perkiraan dapat memengaruhi pola temporal. Finansial bersifat nominal, dan korelasi tidak menyatakan sebab-akibat. Lengkapi nama, NIM, serta username GitHub di bagian awal notebook sebelum pengumpulan.
+
 ## AI Disclosure Statement
 
-Isi bagian ini sebelum pengumpulan akhir.
-
-> Alat AI yang digunakan: [nama alat].
+> Alat AI yang digunakan: OpenAI Codex.
 >
-> Bagian yang dibantu: [contoh: penjelasan error Polars atau review dokumentasi].
+> Bagian yang dibantu: penyusunan notebook Milestone 3 mengikuti template GitHub, kode Polars dan DuckDB, enam visualisasi Plotly, rumusan insight, dan dokumentasi eksekusi.
 >
-> Verifikasi yang dilakukan: [contoh: menjalankan ulang kode, memeriksa dokumentasi resmi, dan memahami setiap cell].
+> Verifikasi otomatis yang dilakukan: menjalankan seluruh sel pada data bersih lokal, memvalidasi format notebook, memeriksa ID unik dan konsistensi agregasi tahunan, serta menghasilkan enam HTML interaktif. Mahasiswa tetap perlu memeriksa hasil, memahami setiap sel, dan dapat menjelaskan analisisnya sendiri.
