@@ -1,0 +1,2 @@
+Aldela Kurniawati
+202310370311209
